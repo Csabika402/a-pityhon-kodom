@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python kódom</title>
+
+    <style>
+        body {
+            background: #171923;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            color: #61dafb;
+        }
+
+        .code-box {
+            background: #252938;
+            border-radius: 12px;
+            padding: 18px;
+            overflow-x: auto;
+        }
+
+        pre {
+            color: #a5f3a5;
+            font-size: 15px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 13px 18px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:active {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🐍 Python kódom</h1>
+        <p>Itt találod a Python-programom kódját.</p>
+
+        <div class="code-box">
+            <pre id="pythonCode">print("Szia, világ!")
+print("Ez az én programom!")</pre>
+
+            <button onclick="copyCode()">
+                📋 Kód másolása
+            </button>
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const code = document.getElementById("pythonCode").textContent;
+
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    document.getElementById("message").textContent =
+                        "✅ A kód kimásolva!";
+                })
+                .catch(() => {
+                    const area = document.createElement("textarea");
+                    area.value = code;
+                    document.body.appendChild(area);
+                    area.select();
+
+                    const success = document.execCommand("copy");
+                    area.remove();
+
+                    document.getElementById("message").textContent =
+                        success ? "✅ A kód kimásolva!" :
+                        "Jelöld ki a kódot, és másold ki kézzel!";
+                });
+        }
+    </script>
+</body>
+</html>
